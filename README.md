@@ -7,7 +7,7 @@
 在CentOS Stream 9的命令行中，直接复制粘贴以下命令即可：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/你的用户名/你的仓库名/main/miner-manager.sh -o miner-manager.sh && chmod +x miner-manager.sh && ./miner-manager.sh
+curl -fsSL https://raw.githubusercontent.com/qiqi258/1-wakuang/main/miner-manager.sh -o miner-manager.sh && chmod +x miner-manager.sh && ./miner-manager.sh
 ```
 
 **注意：** 请将上面的 `你的用户名` 和 `你的仓库名` 替换为你实际的GitHub用户名和仓库名。
