@@ -86,8 +86,8 @@ kill $(cat /tmp/miner.pid)
 
 ## 默认配置
 
-- 矿池：stratum+ssl://ghostrider.unmineable.com:443
-- 算法：gr (Ghostrider)
+- 矿池：stratum+ssl://rx.unmineable.com:443
+- 算法：RandomX
 - 币种：USDT
 - 默认矿工名：qiqi-1
 
