@@ -173,18 +173,18 @@ download_miner() {
 }
 
 # ========================================
-# 函数：设置矿工名称
-# 说明：让用户输入矿工名称，默认为qiqi-1
+# 函数：设置程序名称
+# 说明：让用户输入程序名称，默认为qiqi-1
 # ========================================
 set_worker_name() {
     clear
     echo -e "${CYAN}========================================${NC}"
-    echo -e "${CYAN}       设置矿工名称${NC}"
+    echo -e "${CYAN}       设置程序名称${NC}"
     echo -e "${CYAN}========================================${NC}"
     echo ""
-    echo -e "${YELLOW}当前矿工名称：${WORKER_NAME}${NC}"
+    echo -e "${YELLOW}当前程序名称：${WORKER_NAME}${NC}"
     echo ""
-    echo -n "请输入新的矿工名称（直接回车保持不变）: "
+    echo -n "请输入新的程序名称（直接回车保持不变）: "
     read NEW_NAME
     
     # 如果用户输入了新名称
@@ -192,9 +192,9 @@ set_worker_name() {
         WORKER_NAME="$NEW_NAME"
         # 保存到配置文件
         echo "WORKER_NAME=$WORKER_NAME" > "$MINER_DIR/miner.conf"
-        echo -e "${GREEN}✓ 矿工名称已更新为：${WORKER_NAME}${NC}"
+        echo -e "${GREEN}✓ 程序名称已更新为：${WORKER_NAME}${NC}"
     else
-        echo -e "${YELLOW}矿工名称保持不变${NC}"
+        echo -e "${YELLOW}程序名称保持不变${NC}"
     fi
     
     echo ""
@@ -202,20 +202,20 @@ set_worker_name() {
 }
 
 # ========================================
-# 函数：启动矿工（前台运行）
-# 说明：在前台启动矿工程序，用户可以看到实时输出
+# 函数：启动程序（前台运行）
+# 说明：在前台启动程序，用户可以看到实时输出
 # ========================================
 start_miner() {
     clear
     echo -e "${CYAN}========================================${NC}"
-    echo -e "${CYAN}       启动矿工（前台运行）${NC}"
+    echo -e "${CYAN}       启动程序（前台运行）${NC}"
     echo -e "${CYAN}========================================${NC}"
     echo ""
     
-    # 检查矿工程序是否存在
+    # 检查程序是否存在
     if [ ! -f "$MINER_DIR/$MINER_BINARY" ]; then
-        echo -e "${RED}错误：未找到矿工程序！${NC}"
-        echo -e "${YELLOW}请先执行选项1下载安装矿工程序${NC}"
+        echo -e "${RED}错误：未找到程序！${NC}"
+        echo -e "${YELLOW}请先执行选项1下载安装程序${NC}"
         read -p "按回车键返回主菜单..."
         return 1
     fi
@@ -224,8 +224,8 @@ start_miner() {
     if [ -f "$PID_FILE" ]; then
         PID=$(cat "$PID_FILE")
         if ps -p "$PID" > /dev/null 2>&1; then
-            echo -e "${YELLOW}警告：矿工已经在运行中（PID: $PID）${NC}"
-            echo -n "是否要停止当前运行的矿工并重新启动？(y/n): "
+            echo -e "${YELLOW}警告：程序已经在运行中（PID: $PID）${NC}"
+            echo -n "是否要停止当前运行的程序并重新启动？(y/n): "
             read RESTART
             if [ "$RESTART" = "y" ] || [ "$RESTART" = "Y" ]; then
                 stop_miner_silent
@@ -236,15 +236,15 @@ start_miner() {
         fi
     fi
     
-    echo -e "${BLUE}矿工名称：${WORKER_NAME}${NC}"
+    echo -e "${BLUE}程序名称：${WORKER_NAME}${NC}"
     echo -e "${BLUE}启动命令：${NC}"
     echo -e "${YELLOW}cd $MINER_DIR && ./$MINER_BINARY -a randomx -o stratum+ssl://rx.unmineable.com:443 -u USDT:TDFRoYVFwze54ojydkiPUja8Twix9X5QRR.${WORKER_NAME}#ek8v-txze -p x${NC}"
     echo ""
-    echo -e "${YELLOW}按 Ctrl+C 可以停止矿工${NC}"
+    echo -e "${YELLOW}按 Ctrl+C 可以停止程序${NC}"
     echo -e "${CYAN}========================================${NC}"
     echo ""
     
-    # 启动矿工
+    # 启动程序
     cd "$MINER_DIR" || return 1
     ./$MINER_BINARY -a randomx -o stratum+ssl://rx.unmineable.com:443 -u "USDT:TDFRoYVFwze54ojydkiPUja8Twix9X5QRR.${WORKER_NAME}#ek8v-txze" -p x
     
@@ -253,20 +253,20 @@ start_miner() {
 }
 
 # ========================================
-# 函数：后台启动矿工
-# 说明：在后台启动矿工程序，使用nohup让程序在关闭终端后继续运行
+# 函数：后台启动程序
+# 说明：在后台启动程序，使用nohup让程序在关闭终端后继续运行
 # ========================================
 start_miner_background() {
     clear
     echo -e "${CYAN}========================================${NC}"
-    echo -e "${CYAN}       后台启动矿工${NC}"
+    echo -e "${CYAN}       后台启动程序${NC}"
     echo -e "${CYAN}========================================${NC}"
     echo ""
     
-    # 检查矿工程序是否存在
+    # 检查程序是否存在
     if [ ! -f "$MINER_DIR/$MINER_BINARY" ]; then
-        echo -e "${RED}错误：未找到矿工程序！${NC}"
-        echo -e "${YELLOW}请先执行选项1下载安装矿工程序${NC}"
+        echo -e "${RED}错误：未找到程序！${NC}"
+        echo -e "${YELLOW}请先执行选项1下载安装程序${NC}"
         read -p "按回车键返回主菜单..."
         return 1
     fi
@@ -275,8 +275,8 @@ start_miner_background() {
     if [ -f "$PID_FILE" ]; then
         PID=$(cat "$PID_FILE")
         if ps -p "$PID" > /dev/null 2>&1; then
-            echo -e "${YELLOW}警告：矿工已经在运行中（PID: $PID）${NC}"
-            echo -n "是否要停止当前运行的矿工并重新启动？(y/n): "
+            echo -e "${YELLOW}警告：程序已经在运行中（PID: $PID）${NC}"
+            echo -n "是否要停止当前运行的程序并重新启动？(y/n): "
             read RESTART
             if [ "$RESTART" = "y" ] || [ "$RESTART" = "Y" ]; then
                 stop_miner_silent
@@ -287,7 +287,7 @@ start_miner_background() {
         fi
     fi
     
-    echo -e "${BLUE}正在后台启动矿工...${NC}"
+    echo -e "${BLUE}正在后台启动程序...${NC}"
     
     # 使用nohup在后台启动，并将输出重定向到日志文件
     cd "$MINER_DIR" || return 1
@@ -300,16 +300,16 @@ start_miner_background() {
     sleep 3
     
     if ps -p $(cat "$PID_FILE") > /dev/null 2>&1; then
-        echo -e "${GREEN}✓ 矿工已成功在后台启动${NC}"
+        echo -e "${GREEN}✓ 程序已成功在后台启动${NC}"
         echo -e "${YELLOW}进程ID：$(cat $PID_FILE)${NC}"
         echo -e "${YELLOW}日志文件：$LOG_FILE${NC}"
         echo ""
         echo -e "${CYAN}提示：${NC}"
         echo -e "  - 使用选项5查看运行状态"
         echo -e "  - 使用选项7查看日志"
-        echo -e "  - 使用选项6停止矿工"
+        echo -e "  - 使用选项6停止程序"
     else
-        echo -e "${RED}错误：矿工启动失败！${NC}"
+        echo -e "${RED}错误：程序启动失败！${NC}"
         echo -e "${YELLOW}请查看日志文件：$LOG_FILE${NC}"
         rm -f "$PID_FILE"
     fi
@@ -320,7 +320,7 @@ start_miner_background() {
 
 # ========================================
 # 函数：查看运行状态
-# 说明：检查矿工是否在运行，显示进程信息和资源使用情况
+# 说明：检查程序是否在运行，显示进程信息和资源使用情况
 # ========================================
 check_status() {
     clear
@@ -331,7 +331,7 @@ check_status() {
     
     # 检查PID文件是否存在
     if [ ! -f "$PID_FILE" ]; then
-        echo -e "${RED}未找到PID文件，矿工可能未启动${NC}"
+        echo -e "${RED}未找到PID文件，程序可能未启动${NC}"
         echo ""
         read -p "按回车键返回主菜单..."
         return 1
@@ -342,11 +342,11 @@ check_status() {
     
     # 检查进程是否存在
     if ps -p "$PID" > /dev/null 2>&1; then
-        echo -e "${GREEN}✓ 矿工正在运行${NC}"
+        echo -e "${GREEN}✓ 程序正在运行${NC}"
         echo ""
         echo -e "${YELLOW}进程信息：${NC}"
         echo -e "  进程ID (PID): ${GREEN}$PID${NC}"
-        echo -e "  矿工名称: ${GREEN}$WORKER_NAME${NC}"
+        echo -e "  程序名称: ${GREEN}$WORKER_NAME${NC}"
         echo -e "  安装目录: $MINER_DIR"
         echo -e "  日志文件: $LOG_FILE"
         echo ""
@@ -364,7 +364,7 @@ check_status() {
             echo -e "  ${RED}日志文件不存在${NC}"
         fi
     else
-        echo -e "${RED}✗ 矿工未运行${NC}"
+        echo -e "${RED}✗ 程序未运行${NC}"
         echo -e "${YELLOW}PID文件存在但进程已停止${NC}"
         echo -e "${YELLOW}建议：删除PID文件后重新启动${NC}"
         rm -f "$PID_FILE"
@@ -375,19 +375,19 @@ check_status() {
 }
 
 # ========================================
-# 函数：停止矿工
-# 说明：停止正在运行的矿工进程
+# 函数：停止程序
+# 说明：停止正在运行的程序进程
 # ========================================
 stop_miner() {
     clear
     echo -e "${CYAN}========================================${NC}"
-    echo -e "${CYAN}       停止矿工${NC}"
+    echo -e "${CYAN}       停止程序${NC}"
     echo -e "${CYAN}========================================${NC}"
     echo ""
     
     # 检查PID文件是否存在
     if [ ! -f "$PID_FILE" ]; then
-        echo -e "${YELLOW}未找到PID文件，矿工可能未启动${NC}"
+        echo -e "${YELLOW}未找到PID文件，程序可能未启动${NC}"
         echo ""
         read -p "按回车键返回主菜单..."
         return 1
@@ -398,7 +398,7 @@ stop_miner() {
     
     # 检查进程是否存在
     if ps -p "$PID" > /dev/null 2>&1; then
-        echo -e "${YELLOW}正在停止矿工（PID: $PID）...${NC}"
+        echo -e "${YELLOW}正在停止程序（PID: $PID）...${NC}"
         
         # 尝试优雅停止
         kill "$PID"
@@ -532,7 +532,7 @@ while true; do
             ;;
         0)
             clear
-            echo -e "${GREEN}感谢使用矿工管理工具，再见！${NC}"
+            echo -e "${GREEN}感谢使用程序管理工具，再见！${NC}"
             echo ""
             exit 0
             ;;
