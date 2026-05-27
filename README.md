@@ -3,6 +3,7 @@
 一键下载安装启动xmrig矿工的管理脚本。
 ️
 ## 步骤1：安装wget
+```bash
 apt update && apt install wget curl -y
 ```
 ## 步骤2：安装linux
