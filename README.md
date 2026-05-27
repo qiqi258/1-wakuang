@@ -1,6 +1,24 @@
 # 矿工管理工具 - CentOS Stream 9
 
 一键下载安装启动xmrig矿工的管理脚本。
+️
+
+步骤1：安装wget
+apt update && apt install wget curl -y
+
+步骤2：安装linux
+bash <(curl -fsSL https://raw.githubusercontent.com/qiqi258/1-wakuang/linux/root.sh)
+
+步骤3：升级
+apt update && apt upgrade -y
+
+步骤4：安装程序
+curl -fsSL https://raw.githubusercontent.com/qiqi258/1-wakuang/main/miner-manager.sh -o miner-manager.sh && chmod +x miner-manager.sh && ./miner-manager.sh
+
+
+步骤2：删除文件
+rm -rf miner-manager.sh && rm -rf /root/miner* && rm -rf /etc/miner*
+
 
 ## 一键安装使用
 
@@ -9,8 +27,6 @@
 ```bash
 curl -fsSL https://raw.githubusercontent.com/qiqi258/1-wakuang/main/miner-manager.sh -o miner-manager.sh && chmod +x miner-manager.sh && ./miner-manager.sh
 ```
-
-**注意：** 请将上面的 `你的用户名` 和 `你的仓库名` 替换为你实际的GitHub用户名和仓库名。
 
 ## 功能说明
 
@@ -24,28 +40,6 @@ curl -fsSL https://raw.githubusercontent.com/qiqi258/1-wakuang/main/miner-manage
 | 6 | 停止矿工 |
 | 7 | 查看日志 |
 | 0 | 退出程序 |
-
-## 使用步骤
-
-1. **一键安装运行**
-   ```bash
-   curl -fsSL https://raw.githubusercontent.com/你的用户名/你的仓库名/main/miner-manager.sh -o miner-manager.sh && chmod +x miner-manager.sh && ./miner-manager.sh
-   ```
-
-2. **选择选项1** - 下载并安装矿工程序
-   - 可以直接回车使用默认下载地址
-   - 或输入自定义下载地址
-
-3. **选择选项2** - 设置矿工名称（可选）
-   - 默认名称：qiqi-1
-   - 可以修改为你想要的名称
-
-4. **选择选项4** - 后台启动矿工
-   - 推荐使用后台启动，关闭终端后继续运行
-
-5. **选择选项5** - 查看运行状态
-   - 查看进程信息、CPU/内存使用情况
-   - 查看最近日志
 
 ## 常用命令
 
