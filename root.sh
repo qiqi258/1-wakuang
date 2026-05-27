@@ -3,7 +3,7 @@
 ############################################################
 #                                                          #
 #                 HOPINGBOYZ PROOT SYSTEM                  #
-#                   Ubuntu 22.04 LTS VM                    #
+#                   Ubuntu 24.04 LTS VM                    #
 #                                                          #
 #            Fast • Stable • Optimized • Modern            #
 #                                                          #
@@ -88,7 +88,7 @@ EOF
 echo -e "${RESET}"
 
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}"
-echo -e "${GREEN}          Ubuntu 22.04 LTS Proot VM${RESET}"
+echo -e "${GREEN}          Ubuntu 24.04 LTS Proot VM${RESET}"
 echo -e "${YELLOW}             Powered By HOPINGBOYZ${RESET}"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}"
 
@@ -125,14 +125,14 @@ fi
 }
 
 ############################
-# INSTALL UBUNTU ROOTFS
+# INSTALL UBUNTU 24.04 ROOTFS
 ############################
 
 install_ubuntu() {
 
-UBUNTU_URL="https://cdimage.ubuntu.com/ubuntu-base/releases/22.04/release/ubuntu-base-22.04.5-base-${ARCH_ALT}.tar.gz"
+UBUNTU_URL="https://cdimage.ubuntu.com/ubuntu-base/releases/24.04/release/ubuntu-base-24.04.1-base-${ARCH_ALT}.tar.gz"
 
-echo -e "${CYAN}[*] Downloading Ubuntu 22.04 RootFS...${RESET}"
+echo -e "${CYAN}[*] Downloading Ubuntu 24.04 RootFS...${RESET}"
 
 wget \
 --tries="$MAX_RETRIES" \
@@ -216,7 +216,8 @@ unzip \
 screen \
 tmux \
 python3 \
-python3-pip
+python3-pip \
+build-essential
 
 echo "root:545253" | chpasswd
 
@@ -229,7 +230,7 @@ clear
 
 echo ""
 echo "======================================"
-echo "      HOPINGBOYZ UBUNTU READY"
+echo "      HOPINGBOYZ UBUNTU 24.04 READY"
 echo "======================================"
 echo ""
 
@@ -298,7 +299,7 @@ echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━�
 
 echo ""
 
-echo -e "${YELLOW}OS:${RESET} Ubuntu 22.04 LTS"
+echo -e "${YELLOW}OS:${RESET} Ubuntu 24.04 LTS"
 echo -e "${YELLOW}Architecture:${RESET} $ARCH"
 echo -e "${YELLOW}Kernel:${RESET} $KERNEL_VER"
 echo -e "${YELLOW}Hostname:${RESET} $HOST_NAME"
