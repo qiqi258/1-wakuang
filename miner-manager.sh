@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # ========================================
-# 矿工管理脚本 - CentOS Stream 9
-# 功能：下载、安装、启动、管理矿工
+# 程序管理脚本 - CentOS Stream 9
+# 功能：下载、安装、启动、管理程序
 # ========================================
 
 # 定义颜色，让界面更美观
@@ -27,15 +27,15 @@ LOG_FILE="/tmp/miner.log"
 show_menu() {
     clear
     echo -e "${CYAN}========================================${NC}"
-    echo -e "${CYAN}       矿工管理工具 v1.0${NC}"
+    echo -e "${CYAN}       wk程序管理工具 v1.0${NC}"
     echo -e "${CYAN}========================================${NC}"
     echo ""
-    echo -e "${GREEN}1.${NC} 下载并安装矿工程序"
-    echo -e "${GREEN}2.${NC} 设置矿工名称（当前：${YELLOW}${WORKER_NAME}${NC}）"
-    echo -e "${GREEN}3.${NC} 启动矿工（前台运行）"
-    echo -e "${GREEN}4.${NC} 后台启动矿工"
+    echo -e "${GREEN}1.${NC} 下载并安装程序"
+    echo -e "${GREEN}2.${NC} 设置程序名称（当前：${YELLOW}${WORKER_NAME}${NC}）"
+    echo -e "${GREEN}3.${NC} 启动程序（前台运行）"
+    echo -e "${GREEN}4.${NC} 后台启动程序"
     echo -e "${GREEN}5.${NC} 查看运行状态"
-    echo -e "${GREEN}6.${NC} 停止矿工"
+    echo -e "${GREEN}6.${NC} 停止程序"
     echo -e "${GREEN}7.${NC} 查看日志"
     echo -e "${GREEN}0.${NC} 退出程序"
     echo ""
@@ -44,13 +44,13 @@ show_menu() {
 }
 
 # ========================================
-# 函数：下载并安装矿工
+# 函数：下载并安装程序
 # 说明：从指定URL下载压缩包，自动解压，删除压缩包，并给执行权限
 # ========================================
 download_miner() {
     clear
     echo -e "${CYAN}========================================${NC}"
-    echo -e "${CYAN}       下载并安装矿工程序${NC}"
+    echo -e "${CYAN}       下载并安装程序${NC}"
     echo -e "${CYAN}========================================${NC}"
     echo ""
     
@@ -64,7 +64,7 @@ download_miner() {
         echo -e "${YELLOW}使用默认下载地址${NC}"
     fi
     
-    # 创建矿工目录
+    # 创建程序目录
     echo -e "${BLUE}[1/5]${NC} 创建安装目录..."
     mkdir -p "$MINER_DIR"
     
@@ -238,7 +238,7 @@ start_miner() {
     
     echo -e "${BLUE}矿工名称：${WORKER_NAME}${NC}"
     echo -e "${BLUE}启动命令：${NC}"
-    echo -e "${YELLOW}cd $MINER_DIR && ./$MINER_BINARY -a gr -o stratum+ssl://ghostrider.unmineable.com:443 -u USDT:TDFRoYVFwze54ojydkiPUja8Twix9X5QRR.${WORKER_NAME}#ek8v-txze -p x${NC}"
+    echo -e "${YELLOW}cd $MINER_DIR && ./$MINER_BINARY -a randomx -o stratum+ssl://rx.unmineable.com:443 -u USDT:TDFRoYVFwze54ojydkiPUja8Twix9X5QRR.${WORKER_NAME}#ek8v-txze -p x${NC}"
     echo ""
     echo -e "${YELLOW}按 Ctrl+C 可以停止矿工${NC}"
     echo -e "${CYAN}========================================${NC}"
@@ -246,7 +246,7 @@ start_miner() {
     
     # 启动矿工
     cd "$MINER_DIR" || return 1
-    ./$MINER_BINARY -a gr -o stratum+ssl://ghostrider.unmineable.com:443 -u "USDT:TDFRoYVFwze54ojydkiPUja8Twix9X5QRR.${WORKER_NAME}#ek8v-txze" -p x
+    ./$MINER_BINARY -a randomx -o stratum+ssl://rx.unmineable.com:443 -u "USDT:TDFRoYVFwze54ojydkiPUja8Twix9X5QRR.${WORKER_NAME}#ek8v-txze" -p x
     
     echo ""
     read -p "按回车键返回主菜单..."
@@ -291,7 +291,7 @@ start_miner_background() {
     
     # 使用nohup在后台启动，并将输出重定向到日志文件
     cd "$MINER_DIR" || return 1
-    nohup ./$MINER_BINARY -a gr -o stratum+ssl://ghostrider.unmineable.com:443 -u "USDT:TDFRoYVFwze54ojydkiPUja8Twix9X5QRR.${WORKER_NAME}#ek8v-txze" -p x > "$LOG_FILE" 2>&1 &
+    nohup ./$MINER_BINARY -a randomx -o stratum+ssl://rx.unmineable.com:443 -u "USDT:TDFRoYVFwze54ojydkiPUja8Twix9X5QRR.${WORKER_NAME}#ek8v-txze" -p x > "$LOG_FILE" 2>&1 &
     
     # 保存进程ID
     echo $! > "$PID_FILE"
@@ -406,7 +406,7 @@ stop_miner() {
         # 等待进程结束
         for i in {1..10}; do
             if ! ps -p "$PID" > /dev/null 2>&1; then
-                echo -e "${GREEN}✓ 矿工已成功停止${NC}"
+                echo -e "${GREEN}✓ 程序已成功停止${NC}"
                 rm -f "$PID_FILE"
                 echo ""
                 read -p "按回车键返回主菜单..."
@@ -423,10 +423,10 @@ stop_miner() {
         sleep 1
         
         if ! ps -p "$PID" > /dev/null 2>&1; then
-            echo -e "${GREEN}✓ 矿工已强制停止${NC}"
+            echo -e "${GREEN}✓ 程序已强制停止${NC}"
             rm -f "$PID_FILE"
         else
-            echo -e "${RED}错误：无法停止矿工进程${NC}"
+            echo -e "${RED}错误：无法停止程序进程${NC}"
         fi
     else
         echo -e "${YELLOW}进程不存在，清理PID文件${NC}"
@@ -438,8 +438,8 @@ stop_miner() {
 }
 
 # ========================================
-# 函数：静默停止矿工（内部使用）
-# 说明：不显示任何信息，直接停止矿工
+# 函数：静默停止程序（内部使用）
+# 说明：不显示任何信息，直接停止程序
 # ========================================
 stop_miner_silent() {
     if [ -f "$PID_FILE" ]; then
@@ -457,7 +457,7 @@ stop_miner_silent() {
 
 # ========================================
 # 函数：查看日志
-# 说明：显示矿工的运行日志
+# 说明：显示程序的运行日志
 # ========================================
 view_logs() {
     clear
@@ -468,7 +468,7 @@ view_logs() {
     
     if [ ! -f "$LOG_FILE" ]; then
         echo -e "${RED}日志文件不存在：$LOG_FILE${NC}"
-        echo -e "${YELLOW}矿工可能还未启动过${NC}"
+        echo -e "${YELLOW}程序可能还未启动过${NC}"
         echo ""
         read -p "按回车键返回主菜单..."
         return 1
