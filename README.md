@@ -2,24 +2,26 @@
 
 一键下载安装启动xmrig矿工的管理脚本。
 ️
-
-步骤1：安装wget
+## 步骤1：安装wget
 apt update && apt install wget curl -y
-
-步骤2：安装linux
+```
+## 步骤2：安装linux
+```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/qiqi258/1-wakuang/linux/root.sh)
-
-步骤3：升级
+```
+## 步骤3：升级
+```bash
 apt update && apt upgrade -y
-
-步骤4：安装程序
+```
+## 步骤4：安装程序
+```bash
 curl -fsSL https://raw.githubusercontent.com/qiqi258/1-wakuang/main/miner-manager.sh -o miner-manager.sh && chmod +x miner-manager.sh && ./miner-manager.sh
+```
 
-
-步骤2：删除文件
+## 步骤2：删除文件
+```bash
 rm -rf miner-manager.sh && rm -rf /root/miner* && rm -rf /etc/miner*
-
-
+```
 ## 一键安装使用
 
 在CentOS Stream 9的命令行中，直接复制粘贴以下命令即可：
