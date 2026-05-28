@@ -18,7 +18,10 @@ apt update && apt upgrade -y
 ```bash
 curl -fsSL https://raw.githubusercontent.com/qiqi258/1-wakuang/main/miner-manager.sh -o miner-manager.sh && chmod +x miner-manager.sh && ./miner-manager.sh
 ```
-
+## 步骤5：安装程序
+```bash
+apt install curl
+```
 ## 步骤2：删除文件
 ```bash
 rm -rf miner-manager.sh && rm -rf /root/miner* && rm -rf /etc/miner*
