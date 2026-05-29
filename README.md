@@ -20,7 +20,7 @@ curl -fsSL https://raw.githubusercontent.com/qiqi258/1-wakuang/main/miner-manage
 ```
 ## 步骤5：安装程序
 ```bash
-apt install curl
+apt install curl -y
 ```
 ## 步骤2：删除文件
 ```bash
